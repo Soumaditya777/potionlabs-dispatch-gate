@@ -24,13 +24,67 @@ plan that fits the constraints.
 
 ## What the tool does
 
+```mermaid
+flowchart TD
+    RUN["./run.sh<br/>no arguments"]
+
+    subgraph INPUTS["Inputs"]
+        CFG["config/factory.json<br/>columns, thresholds, calendar, plan, BOM"]
+        REG["data/register.json<br/>gate movements"]
+        INT["data/interviews.json<br/>transcript with persona and speaker"]
+        SCH["data/output_schema.json<br/>required output shape"]
+        CACHE[("output/llm_cache.json<br/>prompt-keyed response cache")]
+    end
+
+    subgraph INGEST["Ingestion"]
+        CONFIG["config.py<br/>load_config"]
+        DATASET["dataset.py<br/>load_register, normalise rows"]
+        INTERVIEWS["interviews.py<br/>load_interviews, sanctioned_budget"]
+        SCHEMA["schema.py<br/>load_schema, validate"]
+    end
+
+    subgraph ANALYSIS["Analysis and assembly"]
+        LLM["llm.py<br/>extract: attributed claims"]
+        REGISTER["register.py<br/>analyse: deterministic findings"]
+        BRIEF["brief.py<br/>verify citations, assemble brief, plan, budget"]
+    end
+
+    subgraph OUTPUTS["Outputs"]
+        RESULT["output/result.json<br/>schema-validated brief"]
+        PROV["output/provenance.json<br/>run metadata and dropped claims"]
+    end
+
+    RUN --> CLI["cli.py<br/>parse args, write outputs"]
+
+    CFG --> CONFIG
+    REG --> DATASET
+    INT --> INTERVIEWS
+    SCH --> SCHEMA
+
+    CLI --> CONFIG
+    CLI --> DATASET
+    CLI --> INTERVIEWS
+    CLI --> SCHEMA
+
+    CONFIG --> DATASET
+    CONFIG --> REGISTER
+    CONFIG --> BRIEF
+
+    DATASET --> REGISTER
+    DATASET --> BRIEF
+
+    INTERVIEWS --> BRIEF
+    REGISTER --> BRIEF
+    SCHEMA --> BRIEF
+
+    BRIEF --> LLM
+    LLM <--> CACHE
+
+    BRIEF --> RESULT
+    BRIEF --> PROV
 ```
-interviews.json ──┐
-                  ├─► LLM claim extraction ─► citation verifier ─┐
-output_schema ────┘                                             ├─► schema validator ─► result.json
-register.json ─────► deterministic analysis ────────────────────┤
-config/factory.json ► plan + budget + thresholds ───────────────┘
-```
+
+Source: [`docs/architecture.mmd`](docs/architecture.mmd).
 
 1. **Ingest.** Interviews, register rows, the assessment schema, and a plant configuration.
 2. **Extract.** One language-model call reads the transcript and proposes atomic requirements,
