@@ -1,0 +1,146 @@
+{
+  "key": "e18b46d2afadaee631da5c31bcf096927c3620cdea2d0d7cb50e99624b473ccb",
+  "provider": "pollinations-public",
+  "model": "gpt-oss-20b",
+  "endpoint": "https://text.pollinations.ai/openai",
+  "raw_excerpt": "{\"requirements\":[{\"text\":\"The gate pass must be printed with one click from the invoice data stored in Tally.\",\"source_persona\":\"dev\",\"status\":\"confirmed\",\"evidence\":[\"u01\",\"u02\"]},{\"text\":\"The pass must include the truck number automatically extracted from the invoice.\",\"source_persona\":\"dev\",\"status\":\"confirmed\",\"evidence\":[\"u01\",\"u02\"]},{\"text\":\"The pass must carry the e‑way bill number for any consignment above ₹1,00,000.\",\"source_persona\":\"anjali\",\"status\":\"confirmed\",\"evidence\":[\"u08\"]},{\"text\":\"The system must generate an invoice‑backed pass during day mode and a provisional chit pass d",
+  "data": {
+    "requirements": [
+      {
+        "text": "The gate pass must be printed with one click from the invoice data stored in Tally.",
+        "source_persona": "dev",
+        "status": "confirmed",
+        "evidence": [
+          "u01",
+          "u02"
+        ]
+      },
+      {
+        "text": "The pass must include the truck number automatically extracted from the invoice.",
+        "source_persona": "dev",
+        "status": "confirmed",
+        "evidence": [
+          "u01",
+          "u02"
+        ]
+      },
+      {
+        "text": "The pass must carry the e‑way bill number for any consignment above ₹1,00,000.",
+        "source_persona": "anjali",
+        "status": "confirmed",
+        "evidence": [
+          "u08"
+        ]
+      },
+      {
+        "text": "The system must generate an invoice‑backed pass during day mode and a provisional chit pass during night mode.",
+        "source_persona": "dev",
+        "status": "assumed",
+        "evidence": [
+          "u17"
+        ]
+      },
+      {
+        "text": "The guard must be able to scan the pass and verify the truck number without typing any data.",
+        "source_persona": "bablu",
+        "status": "assumed",
+        "evidence": [
+          "u17"
+        ]
+      },
+      {
+        "text": "The gate device must operate without live internet connectivity, queuing any sync locally.",
+        "source_persona": "dev",
+        "status": "assumed",
+        "evidence": [
+          "u12"
+        ]
+      },
+      {
+        "text": "The system must not delay the truck beyond the current one‑minute wait time at the gate.",
+        "source_persona": "dev",
+        "status": "confirmed",
+        "evidence": [
+          "u24"
+        ]
+      },
+      {
+        "text": "The pass must be printable only after Dev signs off on the transaction.",
+        "source_persona": "anjali",
+        "status": "confirmed",
+        "evidence": [
+          "u06"
+        ]
+      },
+      {
+        "text": "The system must record the date, lorry number, party, in time, out time, and chit number for each entry.",
+        "source_persona": "bablu",
+        "status": "assumed",
+        "evidence": [
+          "u19"
+        ]
+      },
+      {
+        "text": "The system must allow the gate guard to view the register of all passes for audit purposes.",
+        "source_persona": "bablu",
+        "status": "assumed",
+        "evidence": [
+          "u19"
+        ]
+      },
+      {
+        "text": "The system must be reusable at other sites with similar gate and invoice processes.",
+        "source_persona": "dev",
+        "status": "assumed",
+        "evidence": [
+          "u01"
+        ]
+      }
+    ],
+    "conflicts": [
+      {
+        "between": [
+          "dev",
+          "anjali"
+        ],
+        "about": "Requirement for e‑way bill number on pass",
+        "resolution": "The e‑way bill number is mandatory on the pass above the configured consignment value, fetched with the invoice before the truck reaches the gate, so the guard reads it instead of typing it; the gate flow does not get a new step and the truck does not wait longer.",
+        "evidence": {
+          "dev": [
+            "u24"
+          ],
+          "anjali": [
+            "u08"
+          ]
+        }
+      }
+    ],
+    "constraints": [
+      {
+        "text": "The gate device has no reliable internet connectivity; signal is intermittent and dead near the weighbridge.",
+        "evidence": [
+          "u12"
+        ]
+      }
+    ],
+    "budget_inr": 90000,
+    "open_questions": [
+      {
+        "text": "What is the exact threshold value for e‑way bill requirement?",
+        "owner": "Dev"
+      },
+      {
+        "text": "Who will provide the e‑way bill number to the system?",
+        "owner": "Anjali"
+      },
+      {
+        "text": "How will the system handle invoices generated after night passes?",
+        "owner": "Dev"
+      },
+      {
+        "text": "What is the process for verifying provisional chits at night?",
+        "owner": "Bablu"
+      }
+    ]
+  }
+}

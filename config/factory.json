@@ -1,0 +1,65 @@
+{
+  "plant": "Ghosh Polymers",
+  "dataset": "data/register.json",
+  "register": {
+    "columns": {
+      "date": "date",
+      "vehicle": "vehicle",
+      "party": "party",
+      "in_time": "in_time",
+      "out_time": "out_time",
+      "kind": "type",
+      "invoice_no": "invoice_no",
+      "chit_no": "chit_no",
+      "guard": "guard"
+    },
+    "invoice_kinds": ["invoice"],
+    "provisional_kinds": ["chit"],
+    "night_window": ["20:00", "06:00"],
+    "operating_days": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    "dwell_outlier_minutes": 120,
+    "peak_window_hours": 3
+  },
+  "compliance": {
+    "eway_bill_threshold_inr": 100000,
+    "required_pass_fields": [
+      "invoice_no",
+      "date",
+      "vehicle",
+      "party",
+      "in_time",
+      "out_time",
+      "eway_bill_no"
+    ]
+  },
+  "gate": {
+    "connectivity": "none",
+    "max_service_seconds": 60,
+    "multi_site": true,
+    "budget_inr": 90000
+  },
+  "architecture": {
+    "plan": [
+      "Offline-first gate device: a rugged Android tablet in the gate cabin running a local database; no internet or office network needed to issue a pass.",
+      "Office sync agent on the Tally machine pulls open sales invoices every few minutes and pushes a delta to the gate device over the site Wi-Fi access point; the gate only ever reads a local cache, so a dead link never blocks a truck.",
+      "Day mode: guard picks the invoice (or scans its barcode), the pass is pre-filled with invoice number, party, vehicle and e-way bill number, guard confirms the plate and prints one copy to a Bluetooth thermal printer. Target: under 60 seconds, no retyping.",
+      "Night mode: with the office shut, guard issues a provisional pass with an auto-numbered chit, plate, party and the name of the person who phoned the dispatch; the pass is marked pending-invoice and matched to the Tally invoice next morning.",
+      "Controls: duplicate invoice/chit reference detection, e-way bill number required above the configured value threshold, required-field checks, and an append-only local audit trail with a hash chain so a deleted or edited entry is visible.",
+      "Sync back: gate movements return to the office as an export plus per-invoice notes for Tally, and a daily reconciliation report lists chits still unmatched, duplicate references and passes missing an e-way bill.",
+      "Deploy per plant from configuration only: column mapping, value threshold, night window, guard roster, printer and sync endpoint are settings, not code. Pilot at this plant inside the sanctioned budget, then repeat at the next factory."
+    ],
+    "bill_of_materials_inr": {
+      "rugged_android_tablet": 24000,
+      "bluetooth_thermal_printer": 8500,
+      "site_wifi_access_point": 5500,
+      "ups_and_cabling": 4000,
+      "mounts_and_spares": 3000,
+      "build_and_support_reserve": 40000
+    },
+    "resolution_policy": [
+      "The e-way bill number is mandatory on the pass above the configured consignment value. It is fetched with the invoice before the truck reaches the gate, so the guard reads it instead of typing it; the gate flow does not get a new step and the truck does not wait longer.",
+      "Day and night are two modes of one system: invoice-backed pass by day, provisional chit pass at night, matched to the invoice next morning. Neither mode requires the office to be open.",
+      "The gate device never depends on live connectivity; sync is opportunistic and failures queue locally."
+    ]
+  }
+}

@@ -1,0 +1,2 @@
+# Standard library only. The model call uses urllib; schema validation is in-tree.
+# No third-party runtime dependencies are required.

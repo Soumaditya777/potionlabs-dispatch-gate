@@ -1,0 +1,22 @@
+# assessment credentials and gate keys never leave this machine
+.gate/
+gate.key
+gate.pub
+token.json
+*.pem
+
+# python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+env/
+*.egg-info/
+
+# os / editor
+.DS_Store
+.idea/
+.vscode/
+
+# output/ is deliberately tracked: result.json is the deliverable

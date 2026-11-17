@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "requirements",
+    "conflicts",
+    "constraints",
+    "budget_inr",
+    "register_findings",
+    "plan",
+    "open_questions"
+  ],
+  "properties": {
+    "requirements": {
+      "type": "array",
+      "description": "What the tool must do, one entry per requirement, each traced to the person who said it.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "text",
+          "source_persona",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "source_persona": {
+            "type": "string",
+            "description": "dev | anjali | bablu, or 'assumed' when nobody said it"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "confirmed",
+              "conflicting",
+              "assumed"
+            ]
+          }
+        }
+      }
+    },
+    "conflicts": {
+      "type": "array",
+      "description": "Places where two people told you different things, and what you decided.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "between",
+          "about",
+          "resolution"
+        ],
+        "properties": {
+          "between": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "about": {
+            "type": "string"
+          },
+          "resolution": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Hard limits the design must respect (site, legal, people)."
+    },
+    "budget_inr": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "description": "The sanctioned budget in INR, or null if nobody told you."
+    },
+    "register_findings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "What the data you were handed shows: anomalies, patterns, opportunities."
+    },
+    "plan": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "What you would build, in order."
+    },
+    "open_questions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "What you still do not know and who would know it."
+    }
+  }
+}

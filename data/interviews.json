@@ -1,0 +1,334 @@
+{
+  "interviews": [
+    {
+      "id": "u01",
+      "persona": "dev",
+      "speaker": "Anirban \"Dev\" Ghosh",
+      "question": "What exactly should the gate-pass system do at the factory gate, and who uses it?",
+      "questions": [
+        "What exactly should the gate-pass system do at the factory gate, and who uses it?"
+      ],
+      "answer": "Simple, it is not complicated. The pass prints from the invoice. One click. The invoice is already in Tally, so the pass should come out of it with the truck number, nothing typed twice. That is the whole thing.",
+      "asked_count": 1
+    },
+    {
+      "id": "u02",
+      "persona": "dev",
+      "speaker": "Anirban \"Dev\" Ghosh",
+      "question": "Walk me through what happens today when a truck arrives to pick up material or deliver something, from gate to exit.",
+      "questions": [
+        "Walk me through what happens today when a truck arrives to pick up material or deliver something, from gate to exit.",
+        "What data do you have in Tally that a gate pass needs? Can you give me an export?",
+        "What fields must appear on a gate pass? Any format or legal requirement?"
+      ],
+      "answer": "I told you: The pass prints from the invoice. One click. The invoice is already in Tally, so the pass should come out of it with the truck number, nothing typed twice. That is the whole thing.",
+      "asked_count": 3
+    },
+    {
+      "id": "u03",
+      "persona": "dev",
+      "speaker": "Anirban \"Dev\" Ghosh",
+      "question": "What are the biggest problems you have with the current manual system?",
+      "questions": [
+        "What are the biggest problems you have with the current manual system?"
+      ],
+      "answer": "Anjali handles the paper side, Bablu sits at the gate. Ask them the small things. Ask me about what I want, not how.",
+      "asked_count": 1
+    },
+    {
+      "id": "u04",
+      "persona": "dev",
+      "speaker": "Anirban \"Dev\" Ghosh",
+      "question": "What is the sanctioned budget for this, and what can we spend it on?",
+      "questions": [
+        "What is the sanctioned budget for this, and what can we spend it on?",
+        "Anjali says she needs your approval to give me the sales/invoice list. Do you approve?",
+        "Can Anjali give me the sales list for October?",
+        "Give me the Tally invoice export for October."
+      ],
+      "answer": "Money is Anjali's desk. Ask her.",
+      "asked_count": 4
+    },
+    {
+      "id": "u05",
+      "persona": "dev",
+      "speaker": "Anirban \"Dev\" Ghosh",
+      "question": "How many trucks/passes per day, and how many people at the gate?",
+      "questions": [
+        "How many trucks/passes per day, and how many people at the gate?",
+        "What hardware is already at the gate - computer, printer, phone, power?"
+      ],
+      "answer": "What happens at the gate, Bablu sees. Ask him.",
+      "asked_count": 2
+    },
+    {
+      "id": "u06",
+      "persona": "anjali",
+      "speaker": "Anjali Sen",
+      "question": "What data can you export from Tally that relates to invoices, dispatch and vehicles?",
+      "questions": [
+        "What data can you export from Tally that relates to invoices, dispatch and vehicles?",
+        "Dev has approved. Please print the sales list and any pending invoice list you have.",
+        "What does the sales list contain — columns, invoice value, vehicle, e-way bill number?",
+        "Which invoice values and e-way bill numbers do you hold, and can you export them for October?",
+        "Can you give me the outstanding or pending invoice list?",
+        "What is the highest-value invoice you shipped last month?",
+        "Give me the Tally invoice export for October.",
+        "Show me the e-way bills for October.",
+        "Which invoices were above one lakh last month?",
+        "Does the register you have reconcile with Tally invoices, or do chits get missed?"
+      ],
+      "answer": "I don't hand out the sales list; Dev decides what leaves accounts. Ask him, and if he says yes I will print it.",
+      "asked_count": 10
+    },
+    {
+      "id": "u07",
+      "persona": "anjali",
+      "speaker": "Anjali Sen",
+      "question": "What is the sanctioned budget for this gate-pass project, and what does it cover?",
+      "questions": [
+        "What is the sanctioned budget for this gate-pass project, and what does it cover?"
+      ],
+      "answer": "I can only speak to what has been formally sanctioned. ₹90,000, all in, hardware included. That is what is sanctioned for this. Not a rupee more without Dev's signature, and he will not sign.",
+      "asked_count": 1
+    },
+    {
+      "id": "u08",
+      "persona": "anjali",
+      "speaker": "Anjali Sen",
+      "question": "What fields must a gate pass carry for accounts, GST or audit?",
+      "questions": [
+        "What fields must a gate pass carry for accounts, GST or audit?"
+      ],
+      "answer": "The pass must carry the e-way bill number for any consignment above ₹1,00,000; the checkpost stops the truck otherwise and we pay the penalty. Our CA has warned Dev twice. Today the driver carries a photocopy, when someone remembers.",
+      "asked_count": 1
+    },
+    {
+      "id": "u09",
+      "persona": "anjali",
+      "speaker": "Anjali Sen",
+      "question": "What goes wrong in accounts today with dispatch and gate passes?",
+      "questions": [
+        "What goes wrong in accounts today with dispatch and gate passes?"
+      ],
+      "answer": "Bablu knows what happens at the gate; I only see the paperwork afterwards.",
+      "asked_count": 1
+    },
+    {
+      "id": "u10",
+      "persona": "bablu",
+      "speaker": "Bablu Mondal",
+      "question": "Which register do you keep at the gate, and what columns does it have?",
+      "questions": [
+        "Which register do you keep at the gate, and what columns does it have?",
+        "Show me the register book. What columns does it have and can you hand me the pages as data?"
+      ],
+      "answer": "The register? First ask me what happens here at night, then I show you the book.",
+      "asked_count": 2
+    },
+    {
+      "id": "u11",
+      "persona": "bablu",
+      "speaker": "Bablu Mondal",
+      "question": "What do you actually write down when a truck enters and leaves?",
+      "questions": [
+        "What do you actually write down when a truck enters and leaves?"
+      ],
+      "answer": "Whatever Dev-da says, I do.",
+      "asked_count": 1
+    },
+    {
+      "id": "u12",
+      "persona": "bablu",
+      "speaker": "Bablu Mondal",
+      "question": "What goes wrong at the gate most often?",
+      "questions": [
+        "What goes wrong at the gate most often?"
+      ],
+      "answer": "Well, I can tell you what I see at the gate. Internet? Here? No sir. There is no line to the gate cabin; the office is two hundred metres away. I have my own phone, the signal comes and goes, and near the weighbridge it is dead.",
+      "asked_count": 1
+    },
+    {
+      "id": "u13",
+      "persona": "bablu",
+      "speaker": "Bablu Mondal",
+      "question": "How many trucks a day, and what hours?",
+      "questions": [
+        "How many trucks a day, and what hours?"
+      ],
+      "answer": "Sir, you tell me what you want to know. I am here all day.",
+      "asked_count": 1
+    },
+    {
+      "id": "u14",
+      "persona": "bablu",
+      "speaker": "Bablu Mondal",
+      "question": "What happens here at night?",
+      "questions": [
+        "What happens here at night?"
+      ],
+      "answer": "I open the gate, I close the gate, sir. That is my job.",
+      "asked_count": 1
+    },
+    {
+      "id": "u15",
+      "persona": "bablu",
+      "speaker": "Bablu Mondal",
+      "question": "What does a driver hand you, and what do you hand back?",
+      "questions": [
+        "What does a driver hand you, and what do you hand back?"
+      ],
+      "answer": "Ask me about the trucks and the gate. Office things I do not know.",
+      "asked_count": 1
+    },
+    {
+      "id": "u16",
+      "persona": "bablu",
+      "speaker": "Bablu Mondal",
+      "question": "At shift change or night, what breaks?",
+      "questions": [
+        "At shift change or night, what breaks?",
+        "What is inside the gate cabin - is there a computer, printer or power point?"
+      ],
+      "answer": "I told you: Internet? Here? No sir. There is no line to the gate cabin; the office is two hundred metres away. I have my own phone, the signal comes and goes, and near the weighbridge it is dead.",
+      "asked_count": 2
+    },
+    {
+      "id": "u17",
+      "persona": "bablu",
+      "speaker": "Bablu Mondal",
+      "question": "Has anything gone missing or wrong at night? Tell me the story.",
+      "questions": [
+        "Has anything gone missing or wrong at night? Tell me the story."
+      ],
+      "answer": "Nights at the gate are a different thing. Day time, every truck has the invoice, I check it. Night time the office is shut. Dev-da or the dispatch boy phones me, I write a chit by hand, the truck goes. The invoice gets made next morning, sometimes the day after.",
+      "asked_count": 1
+    },
+    {
+      "id": "u18",
+      "persona": "bablu",
+      "speaker": "Bablu Mondal",
+      "question": "When a truck leaves, do you check the material against the invoice?",
+      "questions": [
+        "When a truck leaves, do you check the material against the invoice?",
+        "What does the driver show you at the gate - invoice copy, e-way bill, or a phone?"
+      ],
+      "answer": "I told you: Day time, every truck has the invoice, I check it. Night time the office is shut. Dev-da or the dispatch boy phones me, I write a chit by hand, the truck goes. The invoice gets made next morning, sometimes the day after.",
+      "asked_count": 2
+    },
+    {
+      "id": "u19",
+      "persona": "bablu",
+      "speaker": "Bablu Mondal",
+      "question": "Do you weigh trucks? Where is the weighbridge slip kept?",
+      "questions": [
+        "Do you weigh trucks? Where is the weighbridge slip kept?"
+      ],
+      "answer": "I'll tell you what I see at the gate. Every chit I write in the register too, the red one: date, lorry number, party, in time, out time, chit number. Invoice trucks also go in it. You want last month's? Take it, it is called register; just bring it back by evening.",
+      "asked_count": 1
+    },
+    {
+      "id": "u20",
+      "persona": "bablu",
+      "speaker": "Bablu Mondal",
+      "question": "Can you give me the gate register as a file or export?",
+      "questions": [
+        "Can you give me the gate register as a file or export?",
+        "Do you have a sample chit or the chit book? Can I see the chit format?",
+        "How do you check Montu's night chits in the morning? Has a chit ever gone missing?"
+      ],
+      "answer": "I told you: Every chit I write in the register too, the red one: date, lorry number, party, in time, out time, chit number. Invoice trucks also go in it. You want last month's? Take it, it is called register; just bring it back by evening.",
+      "asked_count": 3
+    },
+    {
+      "id": "u21",
+      "persona": "dev",
+      "speaker": "Anirban \"Dev\" Ghosh",
+      "question": "May I see the sales list?",
+      "questions": [
+        "May I see the sales list?"
+      ],
+      "answer": "Simple thing. Truck comes, pass prints, truck goes. Why is this taking so long?",
+      "asked_count": 1
+    },
+    {
+      "id": "u22",
+      "persona": "anjali",
+      "speaker": "Anjali Sen",
+      "question": "Do you have a GST e-invoice file?",
+      "questions": [
+        "Do you have a GST e-invoice file?"
+      ],
+      "answer": "That is not something I decide. Dev decides.",
+      "asked_count": 1
+    },
+    {
+      "id": "u23",
+      "persona": "dev",
+      "speaker": "Anirban \"Dev\" Ghosh",
+      "question": "Do you approve Anjali releasing the October invoice and sales data to me?",
+      "questions": [
+        "Do you approve Anjali releasing the October invoice and sales data to me?"
+      ],
+      "answer": "What is there to discuss? It is a gate pass, not a rocket.",
+      "asked_count": 1
+    },
+    {
+      "id": "u24",
+      "persona": "dev",
+      "speaker": "Anirban \"Dev\" Ghosh",
+      "question": "I need the invoice data with values to check e-way bill compliance. Will you allow Anjali to share it?",
+      "questions": [
+        "I need the invoice data with values to check e-way bill compliance. Will you allow Anjali to share it?"
+      ],
+      "answer": "Look, this is not complicated. What e-way rule? Nobody told me about a penalty. Fine, add it to the pass. But the gate does not slow down for it; the truck does not wait one minute more than today.",
+      "asked_count": 1
+    },
+    {
+      "id": "u25",
+      "persona": "anjali",
+      "speaker": "Anjali Sen",
+      "question": "Which October consignments were above one lakh and did any lack an e-way bill? Give me the file.",
+      "questions": [
+        "Which October consignments were above one lakh and did any lack an e-way bill? Give me the file.",
+        "Is there an e-way bill register or Tally report you can hand me?",
+        "Who generates the e-way bill - you, the CA, or the transporter?"
+      ],
+      "answer": "I told you: The pass must carry the e-way bill number for any consignment above ₹1,00,000; the checkpost stops the truck otherwise and we pay the penalty. Our CA has warned Dev twice. Today the driver carries a photocopy, when someone remembers.",
+      "asked_count": 3
+    },
+    {
+      "id": "u26",
+      "persona": "bablu",
+      "speaker": "Bablu Mondal",
+      "question": "What are your shift timings, and who covers when you are off?",
+      "questions": [
+        "What are your shift timings, and who covers when you are off?"
+      ],
+      "answer": "Ah, about the gate duty, yes. Nights I am not here, Montu sits. Relief guard, part time, my cousin's boy. He writes the chits at night, I check them in the morning.",
+      "asked_count": 1
+    },
+    {
+      "id": "u27",
+      "persona": "anjali",
+      "speaker": "Anjali Sen",
+      "question": "Is Tally on a computer in the office, and can another system read the invoices from it?",
+      "questions": [
+        "Is Tally on a computer in the office, and can another system read the invoices from it?"
+      ],
+      "answer": "What happens at the gate, Bablu knows. Ask him.",
+      "asked_count": 1
+    },
+    {
+      "id": "u28",
+      "persona": "dev",
+      "speaker": "Anirban \"Dev\" Ghosh",
+      "question": "How many plants will this run at, and who sets up the second one?",
+      "questions": [
+        "How many plants will this run at, and who sets up the second one?"
+      ],
+      "answer": "Anjali handles the paper side, Bablu sits at the gate. Ask them the small things.",
+      "asked_count": 1
+    }
+  ]
+}

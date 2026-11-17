@@ -1,0 +1,115 @@
+{
+  "requirements": [
+    {
+      "id": "R1",
+      "text": "The gate pass must be printed with one click from the invoice data stored in Tally.",
+      "source_persona": "dev",
+      "status": "confirmed"
+    },
+    {
+      "id": "R2",
+      "text": "The pass must include the truck number automatically extracted from the invoice.",
+      "source_persona": "dev",
+      "status": "confirmed"
+    },
+    {
+      "id": "R3",
+      "text": "The pass must carry the e‑way bill number for any consignment above ₹1,00,000.",
+      "source_persona": "anjali",
+      "status": "confirmed"
+    },
+    {
+      "id": "R4",
+      "text": "The system must generate an invoice‑backed pass during day mode and a provisional chit pass during night mode.",
+      "source_persona": "bablu",
+      "status": "confirmed"
+    },
+    {
+      "id": "R5",
+      "text": "The guard must be able to scan the pass and verify the truck number without typing any data.",
+      "source_persona": "bablu",
+      "status": "confirmed"
+    },
+    {
+      "id": "R6",
+      "text": "The gate device must operate without live internet connectivity, queuing any sync locally.",
+      "source_persona": "bablu",
+      "status": "confirmed"
+    },
+    {
+      "id": "R7",
+      "text": "The system must not delay the truck beyond the current one‑minute wait time at the gate.",
+      "source_persona": "dev",
+      "status": "confirmed"
+    },
+    {
+      "id": "R8",
+      "text": "The pass must be printable only after Dev signs off on the transaction.",
+      "source_persona": "anjali",
+      "status": "confirmed"
+    },
+    {
+      "id": "R9",
+      "text": "The system must record the date, lorry number, party, in time, out time, and chit number for each entry.",
+      "source_persona": "bablu",
+      "status": "confirmed"
+    },
+    {
+      "id": "R10",
+      "text": "The system must allow the gate guard to view the register of all passes for audit purposes.",
+      "source_persona": "bablu",
+      "status": "confirmed"
+    },
+    {
+      "id": "R11",
+      "text": "The system must be reusable at other sites with similar gate and invoice processes.",
+      "source_persona": "dev",
+      "status": "confirmed"
+    }
+  ],
+  "conflicts": [
+    {
+      "between": [
+        "dev",
+        "anjali"
+      ],
+      "about": "Requirement for e‑way bill number on pass",
+      "resolution": "The e‑way bill number is mandatory on the pass above the configured consignment value, fetched with the invoice before the truck reaches the gate, so the guard reads it instead of typing it; the gate flow does not get a new step and the truck does not wait longer."
+    }
+  ],
+  "constraints": [
+    "The gate device has no reliable internet connectivity; signal is intermittent and dead near the weighbridge.",
+    "Gate service must stay within 60 seconds; the owner refused any added wait at the gate.",
+    "Sanctioned spend is Rs 90,000 all-in including hardware.",
+    "An e-way bill number is required on the pass for consignments above Rs 100,000.",
+    "Night movements start between 20:00 and 06:00, when the office is shut and the invoice does not exist yet."
+  ],
+  "budget_inr": 90000,
+  "register_findings": [
+    "The register cannot produce a compliant pass by itself: it has no eway_bill_no. With the configured e-way bill threshold of Rs 100,000, compliance for the 111 invoice-backed movements cannot be checked from this data at all, so the value and e-way bill number must be pulled from the invoice source at issue time.",
+    "Connectivity at the point of use is 'none': a design that calls a server, cloud printer or online validator per pass will fail exactly when the queue is longest. The gate device must issue passes from local state and sync later.",
+    "All 18 night movements (arrivals between 20:00 and 06:00) are chit-backed, never invoice-backed; 18 of 18 chits fall in that window. Night coverage by guard: Bablu 10, Montu 8. The invoice is written the next morning, so the gate is the only record at the moment of exit.",
+    "Invoice reference reuse, invisible to the paper register: GP/26-27/2203 appears 2 times (different parties): 2026-10-01 Roy Brothers (invoice, WB 19 D 5662, row 3); 2026-10-06 New Era Polymers (chit, WB 23 A 8672, row 26). A duplicate check at issue time would have stopped both entries.",
+    "Chit hygiene is inconsistent: 1 chit rows also carry an invoice number (row 26 2026-10-06 C-48 carries GP/26-27/2203) and 0 chit rows have no chit number. The provisional and final records share one field, which is how a reference gets reused.",
+    "129 movements over 2026-10-01 to 2026-10-31 across 10 parties: 111 invoice-backed (86%) and 18 chit-backed (14%). The chit share is the size of the process that currently runs with no invoice at exit.",
+    "Turn-around is tight and complete: median 45 min, 90th percentile 71 min, max 75 min over 129 closed movements; 0 rows have no out-time, 0 have an out-time before the in-time, and 0 exceed 120 min. The gate is not losing time to paperwork; any new check has to fit inside the existing minute or two at the cabin.",
+    "Every one of the 129 rows has a different plate (129 unique): a month of gate traffic with no repeat lorry. Either plates are copied inconsistently from the invoice, or regular carriers are not recorded as master data. Vehicle history or an allow-list cannot be built from this register until plates are validated against a master."
+  ],
+  "plan": [
+    "Offline-first gate device: a rugged Android tablet in the gate cabin running a local database; no internet or office network needed to issue a pass.",
+    "Office sync agent on the Tally machine pulls open sales invoices every few minutes and pushes a delta to the gate device over the site Wi-Fi access point; the gate only ever reads a local cache, so a dead link never blocks a truck.",
+    "Day mode: guard picks the invoice (or scans its barcode), the pass is pre-filled with invoice number, party, vehicle and e-way bill number, guard confirms the plate and prints one copy to a Bluetooth thermal printer. Target: under 60 seconds, no retyping.",
+    "Night mode: with the office shut, guard issues a provisional pass with an auto-numbered chit, plate, party and the name of the person who phoned the dispatch; the pass is marked pending-invoice and matched to the Tally invoice next morning.",
+    "Controls: duplicate invoice/chit reference detection, e-way bill number required above the configured value threshold, required-field checks, and an append-only local audit trail with a hash chain so a deleted or edited entry is visible.",
+    "Sync back: gate movements return to the office as an export plus per-invoice notes for Tally, and a daily reconciliation report lists chits still unmatched, duplicate references and passes missing an e-way bill.",
+    "Deploy per plant from configuration only: column mapping, value threshold, night window, guard roster, printer and sync endpoint are settings, not code. Pilot at this plant inside the sanctioned budget, then repeat at the next factory.",
+    "Fit it inside the sanction: rugged android tablet Rs 24,000, bluetooth thermal printer Rs 8,500, site wifi access point Rs 5,500, ups and cabling Rs 4,000, mounts and spares Rs 3,000, build and support reserve Rs 40,000; total Rs 85,000 against Rs 90,000, leaving Rs 5,000 for contingency.",
+    "Prove it against the register handed over: replay 129 movements (18 chits, 1 reused invoice references) and require the reconciliation report to reproduce every anomaly before go-live."
+  ],
+  "open_questions": [
+    "The register records no e-way bill number and no consignment value, so the Rs 100,000 e-way rule cannot be applied from the gate record: who supplies those fields at issue time and who confirms the e-way bill is valid before the truck leaves? — accounts (Anjali Sen) and the owner (Dev Ghosh)",
+    "Every entry has a different plate (129 of 129): who owns the vehicle and party master data, and should regular carriers be enrolled so a pass can be checked against history? — dispatch/accounts, decided by Dev",
+    "Who chases the 18 provisional chits until each has a matching invoice, and what is the cut-off before an unmatched chit is treated as a loss? — accounts (Anjali Sen)",
+    "Who owns the configuration and sign-off for the next plant, and which fields (columns, threshold, guard roster) differ there? — Dev's team, with accounts for the compliance fields"
+  ]
+}
