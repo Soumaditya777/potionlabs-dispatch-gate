@@ -2,7 +2,7 @@
   "requirements": [
     {
       "id": "R1",
-      "text": "The gate pass must be printed with one click from the invoice data stored in Tally.",
+      "text": "The gate pass must be printed with a single click from the invoice data stored in Tally.",
       "source_persona": "dev",
       "status": "confirmed"
     },
@@ -14,56 +14,50 @@
     },
     {
       "id": "R3",
-      "text": "The pass must carry the e‑way bill number for any consignment above ₹1,00,000.",
+      "text": "The pass must carry the e‑way bill number for consignments above ₹1,00,000.",
       "source_persona": "anjali",
       "status": "confirmed"
     },
     {
       "id": "R4",
-      "text": "The system must generate an invoice‑backed pass during day mode and a provisional chit pass during night mode.",
+      "text": "The guard must be able to view the pass and the e‑way number without needing live connectivity.",
       "source_persona": "bablu",
       "status": "confirmed"
     },
     {
       "id": "R5",
-      "text": "The guard must be able to scan the pass and verify the truck number without typing any data.",
-      "source_persona": "bablu",
+      "text": "During day mode the system must generate an invoice‑backed pass and allow the guard to open the gate immediately.",
+      "source_persona": "dev",
       "status": "confirmed"
     },
     {
       "id": "R6",
-      "text": "The gate device must operate without live internet connectivity, queuing any sync locally.",
+      "text": "During night mode the system must allow a provisional chit pass to be created and matched to the invoice the next morning.",
       "source_persona": "bablu",
       "status": "confirmed"
     },
     {
       "id": "R7",
-      "text": "The system must not delay the truck beyond the current one‑minute wait time at the gate.",
+      "text": "The system must not add any additional waiting time for the truck beyond the current process.",
       "source_persona": "dev",
       "status": "confirmed"
     },
     {
       "id": "R8",
-      "text": "The pass must be printable only after Dev signs off on the transaction.",
-      "source_persona": "anjali",
+      "text": "The system must record the date, lorry number, party, in time, out time, and chit number in a digital register.",
+      "source_persona": "bablu",
       "status": "confirmed"
     },
     {
       "id": "R9",
-      "text": "The system must record the date, lorry number, party, in time, out time, and chit number for each entry.",
+      "text": "The system must allow the guard to print the pass and the register entry in a single operation.",
       "source_persona": "bablu",
       "status": "confirmed"
     },
     {
       "id": "R10",
-      "text": "The system must allow the gate guard to view the register of all passes for audit purposes.",
+      "text": "The system must be usable at the gate location where there is no reliable internet signal.",
       "source_persona": "bablu",
-      "status": "confirmed"
-    },
-    {
-      "id": "R11",
-      "text": "The system must be reusable at other sites with similar gate and invoice processes.",
-      "source_persona": "dev",
       "status": "confirmed"
     }
   ],
@@ -73,14 +67,14 @@
         "dev",
         "anjali"
       ],
-      "about": "Requirement for e‑way bill number on pass",
-      "resolution": "The e‑way bill number is mandatory on the pass above the configured consignment value, fetched with the invoice before the truck reaches the gate, so the guard reads it instead of typing it; the gate flow does not get a new step and the truck does not wait longer."
+      "about": "Whether the pass must include the e‑way bill number and whether a penalty applies if omitted.",
+      "resolution": "The e-way bill number is mandatory on the pass above the configured consignment value. It is fetched with the invoice before the truck reaches the gate, so the guard reads it instead of typing it; the gate flow does not get a new step and the truck does not wait longer."
     }
   ],
   "constraints": [
-    "The gate device has no reliable internet connectivity; signal is intermittent and dead near the weighbridge.",
+    "The system must operate without live internet connectivity.",
+    "The system must not exceed the sanctioned budget of ₹90,000.",
     "Gate service must stay within 60 seconds; the owner refused any added wait at the gate.",
-    "Sanctioned spend is Rs 90,000 all-in including hardware.",
     "An e-way bill number is required on the pass for consignments above Rs 100,000.",
     "Night movements start between 20:00 and 06:00, when the office is shut and the invoice does not exist yet."
   ],
@@ -108,6 +102,8 @@
   ],
   "open_questions": [
     "The register records no e-way bill number and no consignment value, so the Rs 100,000 e-way rule cannot be applied from the gate record: who supplies those fields at issue time and who confirms the e-way bill is valid before the truck leaves? — accounts (Anjali Sen) and the owner (Dev Ghosh)",
+    "What audit trail format is required for the digital register? — Anjali",
+    "Will the system support multiple gate locations? — Dev",
     "Every entry has a different plate (129 of 129): who owns the vehicle and party master data, and should regular carriers be enrolled so a pass can be checked against history? — dispatch/accounts, decided by Dev",
     "Who chases the 18 provisional chits until each has a matching invoice, and what is the cut-off before an unmatched chit is treated as a loss? — accounts (Anjali Sen)",
     "Who owns the configuration and sign-off for the next plant, and which fields (columns, threshold, guard roster) differ there? — Dev's team, with accounts for the compliance fields"

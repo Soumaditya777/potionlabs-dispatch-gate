@@ -5,7 +5,7 @@
   "schema": "data/output_schema.json",
   "movements": 129,
   "utterances": 28,
-  "requirements": 11,
+  "requirements": 10,
   "conflicts": 1,
   "register_findings": 8,
   "llm_used": true,
@@ -18,12 +18,8 @@
   "llm_error": "",
   "dropped_claims": [],
   "notes": [
-    "re-attributed requirement from dev to bablu: The system must generate an invoice‑backed pass during day mode and a ",
-    "re-attributed requirement from dev to bablu: The gate device must operate without live internet connectivity, queui",
-    "dropped open question already answered in transcript: What is the exact threshold value for e‑way bill requirement? — Dev",
-    "dropped open question already answered in transcript: Who will provide the e‑way bill number to the system? — Anjali",
-    "dropped open question already answered in transcript: How will the system handle invoices generated after night passes? — De",
-    "dropped open question already answered in transcript: What is the process for verifying provisional chits at night? — Bablu",
+    "dropped open question already answered in transcript: What is the exact threshold for e‑way bill inclusion? — Dev",
+    "dropped open question already answered in transcript: How will the system handle invoices generated after night chits? — Bab",
     "schema validated: 0 errors"
   ]
 }

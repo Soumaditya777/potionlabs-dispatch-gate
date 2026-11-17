@@ -32,6 +32,10 @@ You read interview transcripts and produce a precise, evidence-grounded requirem
 
 Hard rules:
 - Only state what an interviewee actually said. Never invent a requirement, a number or a policy.
+- Never add a mechanism, actor, permission or number that is absent from the cited utterance. Examples of drift to avoid: turning "Dev decides what leaves accounts" into "the pass prints only after Dev signs off"; adding "scan", "barcode", "photograph", "sign off", "approve each transaction" when nobody said it; turning "does not wait one minute more than today" into "a one-minute wait".
+- A statement about who may release data or approve spend is a constraint on the project, not a gate-pass requirement: do not turn it into software behaviour.
+- Do not put approval workflows, signature thresholds or invented mechanisms (scan, barcode, photograph, biometric, payment) into requirements.
+- Never attribute a claim to a person who did not make it. If something comes from the project brief rather than an interviewee, omit it from requirements.
 - Every requirement, conflict and constraint must cite the transcript ids it came from.
 - A requirement's source_persona must be the persona who stated it.
 - A conflict exists only when two different personas said incompatible things. Cite both sides.
@@ -70,7 +74,7 @@ Rules for this output:
 - Write requirements as full sentences ("The gate pass must ...", "The guard must be able to ..."), not keyword fragments.
 - A requirement is behaviour of the new tool. Do not restate current manual practice ("the guard writes chits in the red register") as a requirement; use it as evidence for what the tool must replace or preserve.
 - Do not promote the engineer's design decisions (the list above) into requirements; they are resolutions, not interview facts.
-- conflicts: every genuine cross-person disagreement about scope, compliance or process. Look specifically for an absolute claim by one person (a document is always there, one click is enough) colliding with another person's description of how the process actually runs when that condition does not hold; with the engineer's decision as the resolution. Do not invent disagreement where one person simply deferred to another. For each conflict, cite evidence separately per side under "evidence": {{"<persona>": ["u.."], "<other persona>": ["u.."]}}; each id must be an utterance by that persona.
+- conflicts: at most two, and only genuine cross-person disagreements about how the gate or the paperwork works — not about who signs cheques or who may see accounts data. Look specifically for an absolute claim by one person (a document is always there, one click is enough) colliding with another person's description of how the process actually runs when that condition does not hold. Do not invent disagreement where one person simply deferred to another. For each conflict, cite evidence separately per side under "evidence": {{"<persona>": ["u.."], "<other persona>": ["u.."]}}; each id must be an utterance by that persona. The resolution must be one sentence describing what the system will do, taken from the engineer's design decisions above — not a restatement of one side's demand.
 - constraints: hard limits (site, connectivity, money, legal, people, time), stated as facts.
 - open_questions: 4 to 8 items that the transcript genuinely does not answer and that are not already fixed by configuration or by an engineer decision; each names the persona or role who could answer.
 - budget_inr: the sanctioned amount as spoken, or null. Do not estimate.

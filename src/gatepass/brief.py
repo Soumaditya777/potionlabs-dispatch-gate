@@ -117,9 +117,14 @@ def _heuristic_requirements(utterances: tuple[Utterance, ...], report: Report) -
         sentences = re.split(r"(?<=[.!?])\s+", utterance.answer)
         for sentence in sentences:
             sentence = _clean(sentence)
-            if len(sentence) < 30:
+            lowered = sentence.lower()
+            if len(sentence) < 30 or len(sentence.split()) < 6:
                 continue
-            if not any(cue in sentence.lower() for cue in REQUIREMENT_CUES):
+            if sentence.endswith("?") or lowered.startswith(("i told you", "ask ", "what happens", "first ask", "that is what", "i can only speak")):
+                continue
+            if any(cue in lowered for cue in ("ask him", "ask her", "ask them", "you tell me", "whatever dev-da says", "i open the gate", "i am here all day")):
+                continue
+            if not any(cue in lowered for cue in REQUIREMENT_CUES):
                 continue
             items.append(
                 {
@@ -273,6 +278,16 @@ def build_brief(
         ):
             report.dropped.append(f"conflict citation attributed to the wrong speaker: {about[:80]}")
             continue
+        # The resolution is an engineering decision, so prefer the configured
+        # policy that addresses this conflict over the model's paraphrase.
+        about_tokens = _tokens(about)
+        best_policy = max(
+            cfg.architecture.resolution_policy,
+            key=lambda policy: len(about_tokens & _tokens(policy)),
+            default="",
+        )
+        if best_policy and len(about_tokens & _tokens(best_policy)) >= 2:
+            resolution = best_policy
         evidence = [i for persona in between for i in side_evidence[persona]]
         conflicts.append({"between": between, "about": about, "resolution": resolution, "evidence": evidence})
     conflicts = _unique_by(conflicts, "about")[:6]
